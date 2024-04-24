@@ -1,39 +1,66 @@
+[this project is from](https://github.com/wkrzywiec/kanban-board.git/)
+# Kanban Board Application
 
-# React Components Readme
+This repository contains the source code for a simple implementation of a Kanban Board application. It consists of three separate Docker containers holding:
 
-This repository contains two main React components: `CalculateFactorial` and `Counter`. Additionally, it includes a Dockerfile for deploying the frontend application.
+- PostgreSQL database
+- Java backend (Spring Boot)
+- Angular frontend
 
-## CalculateFactorial Component
+## Overview
 
-The `CalculateFactorial` component is a powerful tool that calculates the factorial of a given number. Here are its key features:
+A Kanban Board is a tool used to visualize and manage work, originating from the Toyota automotive industry and now widely used in software development. The board typically consists of columns representing different stages of work, such as "To Do," "In Progress," and "Done," with tasks represented as cards within each column.
 
-- **User Input**: The component provides an input field where users can enter a number. This number is used to calculate the factorial.
-- **Factorial Calculation**: Upon receiving the user input, the component calculates the factorial of the input number. The factorial of a number `n` is the product of all positive integers less than or equal to `n`.
-- **Optimized Performance**: The component uses the `useMemo` hook from React to optimize performance. This hook memorizes the result of the factorial calculation, avoiding unnecessary recalculations if the input number hasn't changed.
-- **Result Display**: The component displays the result of the factorial calculation to the user.
-- **Click Counter**: The component includes a counter button that keeps track of how many times it's clicked. This can be useful for tracking user interaction.
+### Functionality
 
-## Counter Component
+The application allows users to:
 
-The `Counter` component is a simple yet effective tool that allows users to increment or decrement a count value. Here are its key features:
+- Create, update, and delete Kanban boards
+- Create, update, and delete tasks within each Kanban board
+- Visualize tasks on the Kanban board and move them between columns to represent their status
 
-- **Count Display**: The component displays a count value to the user. This value changes as the user interacts with the component.
-- **Increment and Decrement Buttons**: The component includes two buttons: one to increment the count value and another to decrement it. These buttons allow the user to interact with the count value directly.
+## How to Run
 
-## Dockerfile
+To run the application, you need to have Docker and Docker Compose installed on your system.
 
-The `frontend/Dockerfile` is configured to create a Docker image for deploying the frontend application. It uses Nginx, a high-performance HTTP server and reverse proxy, as the web server. Here's a brief explanation of the Dockerfile:
+### Prerequisites
 
-```Dockerfile
-# We start from the nginx:alpine image. Alpine Linux is a security-oriented, lightweight Linux distribution.
-FROM nginx:alpine
+- [Docker Installation Guide](https://docs.docker.com/get-docker/)
+- [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
 
-# We copy the built website files into the appropriate directory in the Docker image.
-# Replace './path/to/your/website' with the actual path to your website files.
-COPY ./path/to/your/website /usr/share/nginx/html
+### Running the Application
+
+Navigate to the root directory of the project containing the `docker-compose.yml` file and run the following command in your terminal:
+
+```bash
+docker-compose up -d
 ```
 
-This Dockerfile ensures that your frontend application can be easily deployed using Docker, benefiting from the isolation, scalability, and ease of deployment that Docker provides. Remember to replace `./path/to/your/website` with the actual path to your built website files. 
+This command will start the PostgreSQL database, Java backend, and Angular frontend containers. The application will be accessible at `http://localhost:4200`.
 
-Please note that you'll need to build your React application before copying the files. You can do this by running `npm run build` in your React application directory. This will create a `build` directory with the static website files that you can copy into your Docker image. 
+To stop the application, run:
 
+```bash
+docker-compose down
+```
+
+## Project Structure
+
+- `kanban-app`: Contains the Java backend (Spring Boot) code.
+- `kanban-ui`: Contains the Angular frontend code.
+- `docker-compose.yml`: Docker Compose configuration file for running the entire application stack.
+- `README.md`: Project documentation and instructions.
+
+## Resources
+
+- [GitHub Repository](https://github.com/wkrzywiec/kanban-board)
+- [Medium Blog Post](https://medium.com/@wkrzywiec/how-to-run-database-backend-and-frontend-in-a-single-click-with-docker-compose-4bcda66f6de)
+
+## Notes
+
+- The PostgreSQL database contains a single schema with tables for Kanban boards and tasks.
+- The Java backend exposes REST endpoints for CRUD operations on Kanban boards and tasks. Swagger UI is available at `http://localhost:8080/api/swagger-ui.html`.
+- The Angular frontend provides the user interface for interacting with Kanban boards and tasks.
+
+Enjoy organizing your work with the Kanban Board application!
+```
